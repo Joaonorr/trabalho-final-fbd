@@ -1,6 +1,6 @@
 CREATE SCHEMA posto_saude_vacina;
 
-- TABELAS
+-- TABELAS
 
 CREATE TABLE IF NOT EXISTS agente_de_saude (
 	agente_id SERIAL PRIMARY KEY,
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS posto_lote (
 );
 
 CREATE TABLE IF NOT EXISTS lote (
-	lote_id INTEGER,
+	lote_id SERIAL PRIMARY KEY,
 	qtd_vacina INTEGER,
 	data_validade DATE,
 );
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS lote_vacina (
 );
 
 CREATE TABLE IF NOT EXISTS vacina (
-	vacina_id INTEGER,
+	vacina_id SERIAL PRIMARY KEY,
 	nome_vacina VARCHAR(100),
 	quantidade INTEGER,
 );
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS fabricamte_vacina (
 );
 
 CREATE TABLE IF NOT EXISTS fabricante (
-	fabricante_id INTEGER,
+	fabricante_id SERIAL PRIMARY KEY,
 	nome_fabricante VARCHAR(100),
 	telefone VARCHAR(11)
 );
@@ -68,9 +68,19 @@ CREATE TABLE IF NOT EXISTS lote_cidadao (
 );
 
 CREATE TABLE IF NOT EXISTS cidadao (
-	cidadao_id INTEGER,
+	cidadao_id SERIAL PRIMARY KEY,
 	nome VARCHAR(100),
 	cpf VARCHAR(11),
 	data_nascimento DATE,
 	endereco_id INTEGER
 )
+
+-- RELACIONAMENTOS
+
+ALTER TABLE posto_Agente 
+    ADD FOREIGN KEY (posto_agente_id)  
+    REFERENCES agente_de_saude(agente_id);
+
+ALTER TABLE posto_Agente
+    ADD FOREIGN KEY (posto_de_saude_id)  
+    REFERENCES posto_de_saude(posto_de_saude_id);
