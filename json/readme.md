@@ -1,0 +1,1 @@
+Todos os dados foram gerados com no site [4devs](https://www.4devs.com.br/gerador_de_pessoas/) e estão disponíveis no diretório do projeto. Por ser uma ferramenta de gerar dados aleatórios, os dados não são reais.
