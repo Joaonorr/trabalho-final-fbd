@@ -1,11 +1,18 @@
-CREATE SCHEMA posto_saude_vacina;
-
 -- TABELAS
 
 CREATE TABLE IF NOT EXISTS agente_de_saude (
 	agente_id SERIAL PRIMARY KEY,
-	nome VARCHAR(100),
-	cpf VARCHAR(11)
+	nome VARCHAR(100) NOT NULL,
+	cpf VARCHAR(11) NOT NULL,
+	rg VARCHAR(9) NOT NULL,
+	telefone VARCHAR(11) NOT NULL,
+	email VARCHAR(100) NOT NULL,
+	senha VARCHAR(100) NOT NULL,
+	endereco_id INTEGER,
+	tipo_sangue VARCHAR(3),
+	data_nascimento DATE NOT NULL,
+	data_moficiacao DATE,
+	data_criacao DATE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS posto_Agente (
@@ -73,7 +80,7 @@ CREATE TABLE IF NOT EXISTS cidadao (
 	cpf VARCHAR(11),
 	data_nascimento DATE,
 	endereco_id INTEGER
-)
+);
 
 -- RELACIONAMENTOS
 
