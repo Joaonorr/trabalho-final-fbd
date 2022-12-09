@@ -9,10 +9,10 @@ CREATE TABLE IF NOT EXISTS agente_de_saude (
 	email VARCHAR(100) NOT NULL,
 	senha VARCHAR(100) NOT NULL,
 	endereco_id INTEGER,
-	tipo_sangue VARCHAR(3),
+	tipo_sanguineo VARCHAR(3),
 	data_nascimento DATE NOT NULL,
-	data_moficiacao DATE,
-	data_criacao DATE NOT NULL
+	data_moficiacao TIMESTAMP,
+	data_criacao TIMESTAMP NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS posto_Agente (
@@ -25,10 +25,13 @@ CREATE TABLE IF NOT EXISTS posto_de_saude (
 	endereco_posto_id INTEGER,
 	nome_posto VARCHAR(100),
 	telefone_posto VARCHAR(11)
+	data_moficiacao TIMESTAMP,
+	data_criacao TIMESTAMP NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS endereco (
 	endereco_id SERIAL PRIMARY KEY,
+	cidade VARCHAR(50),
 	cep VARCHAR(8),
 	bairro VARCHAR(20),
 	rua VARCHAR(50),
@@ -44,7 +47,9 @@ CREATE TABLE IF NOT EXISTS posto_lote (
 CREATE TABLE IF NOT EXISTS lote (
 	lote_id SERIAL PRIMARY KEY,
 	qtd_vacina INTEGER,
-	data_validade DATE
+	data_validade DATE,
+	data_moficiacao TIMESTAMP,
+	data_criacao TIMESTAMP NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS lote_vacina (
@@ -55,18 +60,24 @@ CREATE TABLE IF NOT EXISTS lote_vacina (
 CREATE TABLE IF NOT EXISTS vacina (
 	vacina_id SERIAL PRIMARY KEY,
 	nome_vacina VARCHAR(100),
-	quantidade INTEGER
+	quantidade INTEGER,
+	data_moficiacao TIMESTAMP,
+	data_criacao TIMESTAMP NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS fabricante_vacina (
 	fabricante_id INTEGER,
-	vacina_id INTEGER
+	vacina_id INTEGER	
 );
 
 CREATE TABLE IF NOT EXISTS fabricante (
 	fabricante_id SERIAL PRIMARY KEY,
-	nome_fabricante VARCHAR(100),
+	nome VARCHAR(100),
+	email VARCHAR(100),
+	cnpj VARCHAR(14),
 	telefone VARCHAR(11)
+	data_moficiacao TIMESTAMP,
+	data_criacao TIMESTAMP NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS lote_cidadao (
@@ -76,10 +87,17 @@ CREATE TABLE IF NOT EXISTS lote_cidadao (
 
 CREATE TABLE IF NOT EXISTS cidadao (
 	cidadao_id SERIAL PRIMARY KEY,
-	nome VARCHAR(100),
-	cpf VARCHAR(11),
-	data_nascimento DATE,
-	endereco_id INTEGER
+	nome VARCHAR(100) NOT NULL,
+	cpf VARCHAR(11) NOT NULL,
+	rg VARCHAR(9) NOT NULL,
+	telefone VARCHAR(11) NOT NULL,
+	email VARCHAR(100) NOT NULL,
+	senha VARCHAR(100) NOT NULL,
+	endereco_id INTEGER,
+	tipo_sanguineo VARCHAR(3),
+	data_nascimento DATE NOT NULL,
+	data_moficiacao TIMESTAMP,
+	data_criacao TIMESTAMP NOT NULL
 );
 
 -- RELACIONAMENTOS
