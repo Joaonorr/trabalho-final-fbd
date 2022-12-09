@@ -44,39 +44,39 @@ def tratar_rg(rg):
 
 # recebe um dicionário e retorna uma string com o script de inserção
 def tratar_dados(dados):
-    #try:
-    insert_script = "INSERT INTO agente_de_saude (nome, cpf, rg, telefone, email, senha, tipo_sanguineo, data_nascimento, data_criacao) \n     VALUES "
-    primeiro = True
-    for pessoa in dados:
-        nome = tratar_nome(pessoa["nome"])
-        cpf = tratar_cpf(pessoa["cpf"])
-        rg = tratar_rg(pessoa["rg"])
-        senha = pessoa["senha"]
-        telefone = tratar_celular(pessoa["celular"])
-        email = pessoa["email"]
-        tipo_sanguineo = pessoa["tipo_sanguineo"]
-        data_nascimento = tratar_data(pessoa["data_nasc"])
-        data_criacao = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        a = chr(39)
-        if primeiro:
+    try:
+        insert_script = "INSERT INTO agente_de_saude (nome, cpf, rg, telefone, email, senha, tipo_sanguineo, data_nascimento, data_criacao) \n     VALUES "
+        primeiro = True
+        for pessoa in dados:
+            nome = tratar_nome(pessoa["nome"])
+            cpf = tratar_cpf(pessoa["cpf"])
+            rg = tratar_rg(pessoa["rg"])
+            senha = pessoa["senha"]
+            telefone = tratar_celular(pessoa["celular"])
+            email = pessoa["email"]
+            tipo_sanguineo = pessoa["tipo_sanguineo"]
+            data_nascimento = tratar_data(pessoa["data_nasc"])
+            data_criacao = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            a = chr(39)
+            if primeiro:
+                insert_script += f'({a}{nome}{a}, {a}{cpf}{a}, {a}{rg}{a}, {a}{telefone}{a}, {a}{email}{a}, {a}{senha}{a}, {a}{tipo_sanguineo}{a}, {a}{data_nascimento}{a}, {a}{data_criacao}{a}),\n'
+                primeiro = False
+                continue
+
+            insert_script += '            '
             insert_script += f'({a}{nome}{a}, {a}{cpf}{a}, {a}{rg}{a}, {a}{telefone}{a}, {a}{email}{a}, {a}{senha}{a}, {a}{tipo_sanguineo}{a}, {a}{data_nascimento}{a}, {a}{data_criacao}{a}),\n'
-            primeiro = False
-            continue
-
         insert_script += '            '
-        insert_script += f'({a}{nome}{a}, {a}{cpf}{a}, {a}{rg}{a}, {a}{telefone}{a}, {a}{email}{a}, {a}{senha}{a}, {a}{tipo_sanguineo}{a}, {a}{data_nascimento}{a}, {a}{data_criacao}{a}),\n'
-    insert_script += '            '
-    insert_script += f'({a}{nome}{a}, {a}{cpf}{a}, {a}{rg}{a}, {a}{telefone}{a}, {a}{email}{a}, {a}{senha}{a}, {a}{tipo_sanguineo}{a}, {a}{data_nascimento}{a}, {a}{data_criacao}{a});\n'
-    insert_script = insert_script[:-1] 
+        insert_script += f'({a}{nome}{a}, {a}{cpf}{a}, {a}{rg}{a}, {a}{telefone}{a}, {a}{email}{a}, {a}{senha}{a}, {a}{tipo_sanguineo}{a}, {a}{data_nascimento}{a}, {a}{data_criacao}{a});\n'
+        insert_script = insert_script[:-1] 
 
-    # cria o diretório script caso não exista
-    if not os.path.exists("../script"):
-        try:
-            os.mkdir("../script")
-        except OSError:
-            print("Erro ao criar o diretório 'script'")
-            exit(1)
-   # except:
+        # cria o diretório script caso não exista
+        if not os.path.exists("../script"):
+            try:
+                os.mkdir("../script")
+            except OSError:
+                print("Erro ao criar o diretório 'script'")
+                exit(1)
+    except:
         print("Erro ao criar o script de inserção")
         exit(1) 
 
