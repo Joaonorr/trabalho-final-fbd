@@ -60,18 +60,18 @@ CREATE TABLE IF NOT EXISTS lote_vacina (
 CREATE TABLE IF NOT EXISTS vacina (
 	vacina_id SERIAL PRIMARY KEY,
 	nome_vacina VARCHAR(100),
-	quantidade INTEGER,
+	quantidade_doses INTEGER,
 	data_moficiacao TIMESTAMP,
 	data_criacao TIMESTAMP NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS fabricante_vacina (
-	fabricante_id INTEGER,
+CREATE TABLE IF NOT EXISTS fornecedor_vacina (
+	fornecedor_id INTEGER,
 	vacina_id INTEGER	
 );
 
-CREATE TABLE IF NOT EXISTS fabricante (
-	fabricante_id SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS fornecedor (
+	fornecedor_id SERIAL PRIMARY KEY,
 	nome VARCHAR(100),
 	email VARCHAR(100),
 	cnpj VARCHAR(14),
@@ -126,13 +126,13 @@ ALTER TABLE lote_vacina
 	ADD FOREIGN KEY (vacina_id)  
 	REFERENCES vacina(vacina_id);
 
-ALTER TABLE fabricante_vacina
+ALTER TABLE fornecedor_vacina
 	ADD FOREIGN KEY (vacina_id)  
 	REFERENCES vacina(vacina_id);
 
-ALTER TABLE fabricante_vacina
-	ADD FOREIGN KEY (fabricante_id)  
-	REFERENCES fabricante(fabricante_id);
+ALTER TABLE fornecedor_vacina
+	ADD FOREIGN KEY (fornecedor_id)  
+	REFERENCES fornecedor(fornecedor_id);
 
 
 ALTER TABLE lote_cidadao
