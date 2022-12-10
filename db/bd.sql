@@ -31,11 +31,14 @@ CREATE TABLE IF NOT EXISTS posto_de_saude (
 
 CREATE TABLE IF NOT EXISTS endereco (
 	endereco_id SERIAL PRIMARY KEY,
-	cidade VARCHAR(50),
 	cep VARCHAR(8),
+	estado VARCHAR(2),
+	cidade VARCHAR(50),
 	bairro VARCHAR(20),
 	rua VARCHAR(50),
-	numero INTEGER
+	numero INTEGER,
+	data_moficiacao TIMESTAMP,
+	data_criacao TIMESTAMP NOT NULL
 );
 
 
