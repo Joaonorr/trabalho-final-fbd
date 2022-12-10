@@ -26,6 +26,7 @@ def tratar_celular(cei):
         cei = cei.replace("(", "")
         cei = cei.replace(")", "")
         cei = cei.replace(":", "")
+        cei = cei.replace("+", "")
         return cei
     return None
 
