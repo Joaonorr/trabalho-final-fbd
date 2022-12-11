@@ -124,6 +124,23 @@ CREATE TABLE IF NOT EXISTS agente_posto (
 
 -- views
 CREATE VIEW view_agentes AS
-SELECT agente_id, nome, cpf, telefone, estado, cidade, bairro, rua, numero
-FROM agente_de_saude JOIN endereco ON agente_de_saude.endereco_id = endereco.endereco_id;
+SELECT 
+	agente_de_saude.agente_id,
+	agente_de_saude.nome, 
+	agente_de_saude.cpf, 
+	agente_de_saude.rg, 
+	agente_de_saude.telefone, 
+	agente_de_saude.email, 
+	agente_de_saude.tipo_sanguineo, 
+	agente_de_saude.data_nascimento, 
+	agente_de_saude.data_criacao, 
+	endereco.cep, 
+	endereco.estado, 
+	endereco.cidade, 
+	endereco.bairro, 
+	endereco.rua, 
+	endereco.numero, 
+FROM agente_de_saude, endereco
+WHERE agente_de_saude.agente_id = endereco_agente.agente_id AND endereco_agente.endereco_id = endereco.endereco_id;
+
 
