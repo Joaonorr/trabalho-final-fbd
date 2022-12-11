@@ -13,8 +13,7 @@ except:
 
 
 cursor = con.cursor()
-cursor.execute("""
-                -- TABELAS
+cursor.execute("""-- TABELAS
 
                 CREATE TABLE IF NOT EXISTS agente_de_saude (
                     agente_id SERIAL PRIMARY KEY,
@@ -24,7 +23,6 @@ cursor.execute("""
                     telefone VARCHAR(14) NOT NULL,
                     email VARCHAR(100) NOT NULL,
                     senha VARCHAR(100) NOT NULL,
-                    endereco_id INTEGER,
                     tipo_sanguineo VARCHAR(3),
                     data_nascimento DATE NOT NULL,
                     data_moficiacao TIMESTAMP,
@@ -38,7 +36,6 @@ cursor.execute("""
 
                 CREATE TABLE IF NOT EXISTS posto_de_saude (
                     posto_de_saude_id SERIAL PRIMARY KEY,
-                    endereco_posto_id INTEGER,
                     nome_posto VARCHAR(100) UNIQUE NOT NULL,
                     telefone VARCHAR(14) NOT NULL,
                     data_moficiacao TIMESTAMP,
@@ -119,58 +116,25 @@ cursor.execute("""
                     data_criacao TIMESTAMP NOT NULL
                 );
 
-                -- RELACIONAMENTOS
+                CREATE TABLE IF NOT EXISTS endereco_cidadao (
+                    endereco_id INTEGER,
+                    cidadao_id INTEGER UNIQUE
+                );
 
-                ALTER TABLE posto_Agente 
-                    ADD FOREIGN KEY (posto_agente_id)  
-                    REFERENCES agente_de_saude(agente_id);
+                CREATE TABLE IF NOT EXISTS endereco_posto (
+                    endereco_id INTEGER,
+                    posto_de_saude_id INTEGER UNIQUE
+                );
 
-                ALTER TABLE posto_Agente
-                    ADD FOREIGN KEY (posto_de_saude_id)  
-                    REFERENCES posto_de_saude(posto_de_saude_id);
+                CREATE TABLE IF NOT EXISTS endereco_agente (
+                    endereco_id INTEGER,
+                    agente_id INTEGER UNIQUE
+                );
 
-                ALTER TABLE posto_lote
-                    ADD FOREIGN KEY (posto_de_saude_id)  
-                    REFERENCES posto_de_saude(posto_de_saude_id);
-
-                ALTER TABLE posto_lote
-                    ADD FOREIGN KEY (lote_id)  
-                    REFERENCES lote(lote_id);
-
-                ALTER TABLE lote_vacina
-                    ADD FOREIGN KEY (lote_id)  
-                    REFERENCES lote(lote_id);
-
-                ALTER TABLE lote_vacina
-                    ADD FOREIGN KEY (vacina_id)  
-                    REFERENCES vacina(vacina_id);
-
-                ALTER TABLE fornecedor_vacina
-                    ADD FOREIGN KEY (vacina_id)  
-                    REFERENCES vacina(vacina_id);
-
-                ALTER TABLE fornecedor_vacina
-                    ADD FOREIGN KEY (fornecedor_id)  
-                    REFERENCES fornecedor(fornecedor_id);
-
-
-                ALTER TABLE lote_cidadao
-                    ADD FOREIGN KEY (lote_id)  
-                    REFERENCES lote(lote_id);
-
-                ALTER TABLE lote_cidadao
-                    ADD FOREIGN KEY (cidadao_id)  
-                    REFERENCES cidadao(cidadao_id);
-
-                ALTER TABLE cidadao
-                    ADD FOREIGN KEY (endereco_id)  
-                    REFERENCES endereco(endereco_id);
-
-                ALTER TABLE posto_de_saude
-                    ADD FOREIGN KEY (endereco_posto_id)  
-                    REFERENCES endereco(endereco_id);
-
-
+                CREATE TABLE IF NOT EXISTS agente_posto (
+                    agente_id INTEGER,
+                    posto_de_saude_id INTEGER
+                );
 
                 """)
 cursor.query
