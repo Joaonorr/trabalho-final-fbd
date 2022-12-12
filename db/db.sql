@@ -171,6 +171,7 @@ WHERE
 
 CREATE VIEW view_vacinas AS
 SELECT 
+	vacina.vacina_id,
 	vacina.nome_vacina,
 	vacina.quantidade_doses,
 	fornecedor.nome,
