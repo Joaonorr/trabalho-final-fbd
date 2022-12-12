@@ -139,8 +139,31 @@ SELECT
 	endereco.cidade, 
 	endereco.bairro, 
 	endereco.rua, 
-	endereco.numero, 
-FROM agente_de_saude, endereco
-WHERE agente_de_saude.agente_id = endereco_agente.agente_id AND endereco_agente.endereco_id = endereco.endereco_id;
+	endereco.numero
+FROM 
+	agente_de_saude, endereco, endereco_agente
+WHERE 
+	agente_de_saude.agente_id = endereco_agente.agente_id 
+	AND 
+	endereco_agente.endereco_id = endereco.endereco_id;
 
 
+
+CREATE VIEW view_postos AS
+SELECT 
+	posto_de_saude.posto_de_saude_id,
+	posto_de_saude.nome_posto, 
+	posto_de_saude.telefone, 
+	posto_de_saude.data_criacao, 
+	endereco.cep, 
+	endereco.estado, 
+	endereco.cidade, 
+	endereco.bairro, 
+	endereco.rua, 
+	endereco.numero
+FROM
+	posto_de_saude, endereco, endereco_posto
+WHERE
+	posto_de_saude.posto_de_saude_id = endereco_posto.posto_de_saude_id
+	AND
+	endereco_posto.endereco_id = endereco.endereco_id;
