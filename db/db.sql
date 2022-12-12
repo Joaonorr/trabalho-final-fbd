@@ -167,3 +167,19 @@ WHERE
 	posto_de_saude.posto_de_saude_id = endereco_posto.posto_de_saude_id
 	AND
 	endereco_posto.endereco_id = endereco.endereco_id;
+
+
+CREATE VIEW view_vacinas AS
+SELECT 
+	vacina.nome_vacina,
+	vacina.quantidade_doses,
+	fornecedor.nome,
+	fornecedor.cnpj,
+	fornecedor.telefone,
+	fornecedor.email
+FROM
+	vacina, fornecedor, fornecedor_vacina
+WHERE
+	vacina.vacina_id = fornecedor_vacina.vacina_id
+	AND
+	fornecedor_vacina.fornecedor_id = fornecedor.fornecedor_id;
