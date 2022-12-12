@@ -94,7 +94,6 @@ CREATE TABLE IF NOT EXISTS cidadao (
 	telefone VARCHAR(14) NOT NULL,
 	email VARCHAR(100) NOT NULL,
 	senha VARCHAR(100) NOT NULL,
-	endereco_id INTEGER,
 	tipo_sanguineo VARCHAR(3),
 	data_nascimento DATE NOT NULL,
 	data_moficiacao TIMESTAMP,
@@ -184,3 +183,27 @@ WHERE
 	vacina.vacina_id = fornecedor_vacina.vacina_id
 	AND
 	fornecedor_vacina.fornecedor_id = fornecedor.fornecedor_id;
+
+CREATE VIEW view_cidadao AS
+SELECT 
+	cidadao.cidadao_id,
+	cidadao.nome,
+	cidadao.cpf,
+	cidadao.rg,
+	cidadao.telefone,
+	cidadao.email,
+	cidadao.tipo_sanguineo,
+	cidadao.data_nascimento,
+	cidadao.data_criacao,
+	endereco.cep,
+	endereco.estado,
+	endereco.cidade,
+	endereco.bairro,
+	endereco.rua,
+	endereco.numero
+FROM
+	cidadao, endereco, endereco_cidadao
+WHERE
+	cidadao.cidadao_id = endereco_cidadao.cidadao_id
+	AND
+	endereco_cidadao.endereco_id = endereco.endereco_id;
